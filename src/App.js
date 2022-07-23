@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import {Stack} from 'react-bootstrap';
+import ClientForm from "./components/ClientForm/ClientForm";
+import {useState} from "react";
+import ClientList from "./components/ClientList/ClientList";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+
+    const [clients, setClients] = useState([
+        {id: 1, email: 'vlad@gmail.com', name: 'Vlad', product: 'apple', price: 100, date: new Date().toLocaleString()}
+    ]);
+
+    const handleSetClient = (value) =>{
+        setClients([...clients, value]);
+        console.log(clients)
+    }
+
+    return (
+        <Stack gap={5}>
+            <ClientForm handleSetClient={handleSetClient} />
+            <ClientList clients={clients}  />
+        </Stack>
+    );
 }
 
 export default App;
